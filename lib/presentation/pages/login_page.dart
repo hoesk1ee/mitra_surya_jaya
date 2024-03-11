@@ -5,6 +5,17 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Placeholder();
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
+          children: [
+            Placeholder(
+              fallbackHeight: 200,
+              fallbackWidth: 100,
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
