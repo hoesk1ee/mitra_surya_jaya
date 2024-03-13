@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mitra_surya_jaya/presentation/pages/cashier_page.dart';
+import 'package:mitra_surya_jaya/presentation/pages/forgot_password_page.dart';
 import 'package:mitra_surya_jaya/presentation/pages/home_page.dart';
 import 'package:mitra_surya_jaya/presentation/pages/login_page.dart';
 import 'package:mitra_surya_jaya/presentation/pages/product_page.dart';
+import 'package:mitra_surya_jaya/presentation/pages/register_page.dart';
+import 'package:mitra_surya_jaya/presentation/pages/verification_page.dart';
 import 'package:mitra_surya_jaya/presentation/widgets/navbar_widget.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -16,6 +19,22 @@ final router = GoRouter(
     GoRoute(
       path: '/',
       builder: (context, state) => const LoginPage(),
+      routes: [
+        GoRoute(
+          path: 'register',
+          builder: (context, state) => const RegisterPage(),
+          routes: [
+            GoRoute(
+              path: 'verification',
+              builder: (context, state) => const VerificationPage(),
+            ),
+          ],
+        ),
+        GoRoute(
+          path: 'forgot-password',
+          builder: (context, state) => const ForgotPasswordPage(),
+        ),
+      ],
     ),
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) {

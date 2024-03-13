@@ -14,4 +14,10 @@ class AppTextStyle {
   static const mainColorTextStyle = TextStyle(
     color: AppColor.mainOrangeColor,
   );
+  static const mainTextButtonCollor = TextStyle(
+    color: AppColor.mainWhiteColor,
+  );
+  static const smallSizeTextStyle = TextStyle(
+    fontSize: AppSize.hintTextSize,
+  );
 }

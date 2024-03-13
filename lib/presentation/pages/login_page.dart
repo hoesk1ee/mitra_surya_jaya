@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mitra_surya_jaya/presentation/misc/colors.dart';
+import 'package:mitra_surya_jaya/presentation/misc/paddings.dart';
 import 'package:mitra_surya_jaya/presentation/misc/text_styles.dart';
+import 'package:mitra_surya_jaya/presentation/widgets/custom_authbutton_widget.dart';
+import 'package:mitra_surya_jaya/presentation/widgets/custom_textfield_widget.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -15,93 +19,103 @@ class _LoginPageState extends State<LoginPage> {
   final formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  bool isObscure = true;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(18, 64, 18, 0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                "Mitra Surya Jaya",
-                style: AppTextStyle.titleTextStyle,
-              ),
-              const Gap(18),
-              SizedBox(
-                width: MediaQuery.sizeOf(context).width / 1.2,
-                child: const Text(
-                  "Selamat datang, silahkan masukkan email dan kata sandi untuk proses log in.",
-                  style: AppTextStyle.hintTextStyle,
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: AppPadding.authPadding,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  "Mitra Surya Jaya",
+                  style: AppTextStyle.titleTextStyle,
                 ),
-              ),
-              const Gap(36),
-              Form(
-                key: formKey,
-                child: Column(
-                  children: [
-                    TextFormField(
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: AppColor.textFieldColor,
-                        contentPadding: const EdgeInsets.symmetric(
-                            vertical: 18, horizontal: 18),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: const BorderSide(
-                            color: AppColor.shadowColor,
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: const BorderSide(
-                            color: AppColor.mainOrangeColor,
-                          ),
-                        ),
-                        hintText: "Email",
-                        hintStyle: AppTextStyle.hintTextStyle,
-                      ),
-                    ),
-                    const Gap(16),
-                    TextFormField(
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: AppColor.textFieldColor,
-                        contentPadding: const EdgeInsets.symmetric(
-                            vertical: 18, horizontal: 18),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: const BorderSide(
-                            color: AppColor.shadowColor,
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: const BorderSide(
-                            color: AppColor.mainOrangeColor,
-                          ),
-                        ),
-                        hintText: "Password",
-                        hintStyle: AppTextStyle.hintTextStyle,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const Gap(16),
-              Align(
-                alignment: Alignment.centerRight,
-                child: GestureDetector(
-                  onTap: () {},
+                const Gap(18),
+                SizedBox(
+                  width: MediaQuery.sizeOf(context).width / 1.2,
                   child: const Text(
-                    "Lupa Password?",
-                    style: AppTextStyle.mainColorTextStyle,
+                    "Selamat datang, silahkan masukkan email dan kata sandi untuk proses log in.",
+                    style: AppTextStyle.hintTextStyle,
                   ),
                 ),
-              ),
-            ],
+                const Gap(36),
+                Form(
+                  key: formKey,
+                  child: Column(
+                    children: [
+                      CustomTextFieldWidget(
+                        controller: _emailController,
+                        hintText: "Email",
+                      ),
+                      const Gap(16),
+                      CustomTextFieldWidget(
+                        controller: _passwordController,
+                        hintText: 'Password',
+                        obscure: isObscure,
+                        suffix: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              isObscure = !isObscure;
+                            });
+                          },
+                          child: Icon(
+                            isObscure
+                                ? Icons.visibility_outlined
+                                : Icons.visibility_off_outlined,
+                            color: AppColor.mainOrangeColor,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const Gap(16),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: GestureDetector(
+                    onTap: () {
+                      context.go("/forgot-password");
+                    },
+                    child: const Text(
+                      "Lupa password?",
+                      style: AppTextStyle.mainColorTextStyle,
+                    ),
+                  ),
+                ),
+                const Gap(64),
+                CustomAuthButtonWidget(
+                  onPressed: () {
+                    context.go('/home');
+                  },
+                  label: "Masuk",
+                ),
+                const Gap(24),
+                Center(
+                  child: Column(
+                    children: [
+                      const Text(
+                        "Belum memiliki akun?",
+                        style: AppTextStyle.smallSizeTextStyle,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          context.go('/register');
+                        },
+                        child: const Text(
+                          "Daftar disini",
+                          style: AppTextStyle.mainColorTextStyle,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
