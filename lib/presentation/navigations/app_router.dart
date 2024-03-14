@@ -23,16 +23,14 @@ final router = GoRouter(
         GoRoute(
           path: 'register',
           builder: (context, state) => const RegisterPage(),
-          routes: [
-            GoRoute(
-              path: 'verification',
-              builder: (context, state) => const VerificationPage(),
-            ),
-          ],
         ),
         GoRoute(
           path: 'forgot-password',
           builder: (context, state) => const ForgotPasswordPage(),
+        ),
+        GoRoute(
+          path: 'verification',
+          builder: (context, state) => const VerificationPage(),
         ),
       ],
     ),
