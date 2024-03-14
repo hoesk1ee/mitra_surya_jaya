@@ -6,6 +6,7 @@ import 'package:mitra_surya_jaya/presentation/pages/home_page.dart';
 import 'package:mitra_surya_jaya/presentation/pages/login_page.dart';
 import 'package:mitra_surya_jaya/presentation/pages/product_page.dart';
 import 'package:mitra_surya_jaya/presentation/pages/register_page.dart';
+import 'package:mitra_surya_jaya/presentation/pages/reset_password_confirmation_page.dart';
 import 'package:mitra_surya_jaya/presentation/pages/verification_page.dart';
 import 'package:mitra_surya_jaya/presentation/widgets/navbar_widget.dart';
 
@@ -31,6 +32,10 @@ final router = GoRouter(
         GoRoute(
           path: 'verification',
           builder: (context, state) => const VerificationPage(),
+        ),
+        GoRoute(
+          path: 'reset-confirmation',
+          builder: (context, state) => const ResetPasswordConfirmationPage(),
         ),
       ],
     ),

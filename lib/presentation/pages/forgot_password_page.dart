@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mitra_surya_jaya/presentation/misc/paddings.dart';
 import 'package:mitra_surya_jaya/presentation/misc/text_styles.dart';
 import 'package:mitra_surya_jaya/presentation/widgets/custom_authbutton_widget.dart';
@@ -48,7 +49,9 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                 const Gap(36),
                 CustomAuthButtonWidget(
                   label: "Reset Password",
-                  onPressed: () {},
+                  onPressed: () {
+                    context.go('/reset-confirmation');
+                  },
                 )
               ],
             ),
