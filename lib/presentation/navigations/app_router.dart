@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mitra_surya_jaya/presentation/pages/cashier_page.dart';
-import 'package:mitra_surya_jaya/presentation/pages/forgot_password_page.dart';
+import 'package:mitra_surya_jaya/presentation/pages/auth-pages/forgot_password_page.dart';
 import 'package:mitra_surya_jaya/presentation/pages/home_page.dart';
-import 'package:mitra_surya_jaya/presentation/pages/login_page.dart';
+import 'package:mitra_surya_jaya/presentation/pages/auth-pages/login_page.dart';
 import 'package:mitra_surya_jaya/presentation/pages/product_page.dart';
-import 'package:mitra_surya_jaya/presentation/pages/register_page.dart';
-import 'package:mitra_surya_jaya/presentation/pages/reset_password_confirmation_page.dart';
-import 'package:mitra_surya_jaya/presentation/pages/verification_page.dart';
+import 'package:mitra_surya_jaya/presentation/pages/auth-pages/register_page.dart';
+import 'package:mitra_surya_jaya/presentation/pages/auth-pages/reset_password_confirmation_page.dart';
+import 'package:mitra_surya_jaya/presentation/pages/auth-pages/verification_page.dart';
 import 'package:mitra_surya_jaya/presentation/widgets/navbar_widget.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();

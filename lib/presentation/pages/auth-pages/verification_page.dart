@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mitra_surya_jaya/presentation/misc/colors.dart';
 import 'package:mitra_surya_jaya/presentation/misc/paddings.dart';
 import 'package:mitra_surya_jaya/presentation/misc/text_styles.dart';
 import 'package:mitra_surya_jaya/presentation/widgets/custom_authbutton_widget.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
-class VerificationPage extends StatelessWidget {
+class VerificationPage extends StatefulWidget {
   const VerificationPage({super.key});
 
+  @override
+  State<VerificationPage> createState() => _VerificationPageState();
+}
+
+class _VerificationPageState extends State<VerificationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +55,9 @@ class VerificationPage extends StatelessWidget {
                 const Gap(36),
                 CustomAuthButtonWidget(
                   label: "Ke Halaman Utama",
-                  onPressed: () {},
+                  onPressed: () {
+                    context.go('/');
+                  },
                 )
               ],
             ),
