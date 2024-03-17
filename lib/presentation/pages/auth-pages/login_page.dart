@@ -5,8 +5,10 @@ import 'package:go_router/go_router.dart';
 import 'package:mitra_surya_jaya/presentation/misc/colors.dart';
 import 'package:mitra_surya_jaya/presentation/misc/paddings.dart';
 import 'package:mitra_surya_jaya/presentation/misc/text_styles.dart';
+import 'package:mitra_surya_jaya/presentation/providers/auth_provider.dart';
 import 'package:mitra_surya_jaya/presentation/widgets/custom_authbutton_widget.dart';
 import 'package:mitra_surya_jaya/presentation/widgets/custom_textfield_widget.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -51,6 +53,12 @@ class _LoginPageState extends State<LoginPage> {
                       CustomTextFieldWidget(
                         controller: _emailController,
                         hintText: "Email",
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Silahkan isi email terlebih dahulu!';
+                          }
+                          return null;
+                        },
                       ),
                       const Gap(16),
                       CustomTextFieldWidget(
@@ -70,6 +78,12 @@ class _LoginPageState extends State<LoginPage> {
                             color: AppColor.mainOrangeColor,
                           ),
                         ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Silahkan isi password terlebih dahulu!';
+                          }
+                          return null;
+                        },
                       ),
                     ],
                   ),
@@ -89,8 +103,14 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 const Gap(64),
                 CustomAuthButtonWidget(
-                  onPressed: () {
-                    context.go('/home');
+                  onPressed: () async {
+                    if (formKey.currentState!.validate()) {
+                      final authRead = context.read<AuthProvider>();
+
+                      await authRead.userLogin().then((value) {
+                        context.go('/home');
+                      });
+                    }
                   },
                   label: "Masuk",
                 ),

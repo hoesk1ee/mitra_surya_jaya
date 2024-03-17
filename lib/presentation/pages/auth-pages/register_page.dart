@@ -53,16 +53,34 @@ class _RegisterPageState extends State<RegisterPage> {
                       CustomTextFieldWidget(
                         controller: _nameController,
                         hintText: "Nama",
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Silahkan isi nama terlebih dahulu!';
+                          }
+                          return null;
+                        },
                       ),
                       const Gap(16),
                       CustomTextFieldWidget(
                         controller: _phoneController,
                         hintText: "No. HP",
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Silahkan isi nomor HP terlebih dahulu!';
+                          }
+                          return null;
+                        },
                       ),
                       const Gap(16),
                       CustomTextFieldWidget(
                         controller: _emailController,
                         hintText: "Email",
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Silahkan isi email terlebih dahulu!';
+                          }
+                          return null;
+                        },
                       ),
                       const Gap(16),
                       CustomTextFieldWidget(
@@ -82,6 +100,12 @@ class _RegisterPageState extends State<RegisterPage> {
                             color: AppColor.mainOrangeColor,
                           ),
                         ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Silahkan isi password terlebih dahulu!';
+                          }
+                          return null;
+                        },
                       ),
                       const Gap(16),
                       CustomTextFieldWidget(
@@ -101,6 +125,12 @@ class _RegisterPageState extends State<RegisterPage> {
                             color: AppColor.mainOrangeColor,
                           ),
                         ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Silahkan isi kembali password terlebih dahulu!';
+                          }
+                          return null;
+                        },
                       ),
                       const Gap(16),
                       CustomAuthButtonWidget(

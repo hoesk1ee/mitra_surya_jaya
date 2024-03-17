@@ -44,6 +44,12 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                   child: CustomTextFieldWidget(
                     controller: _emailController,
                     hintText: "Email",
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Silahkan isi email terlebih dahulu!';
+                      }
+                      return null;
+                    },
                   ),
                 ),
                 const Gap(36),
