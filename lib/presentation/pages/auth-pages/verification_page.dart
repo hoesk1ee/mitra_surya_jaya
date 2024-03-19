@@ -56,7 +56,7 @@ class _VerificationPageState extends State<VerificationPage> {
                 CustomAuthButtonWidget(
                   label: "Ke Halaman Utama",
                   onPressed: () {
-                    context.go('/');
+                    context.go('/home');
                   },
                 )
               ],

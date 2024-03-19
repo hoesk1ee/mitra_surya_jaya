@@ -6,7 +6,6 @@ class AuthRepository {
 
   Future<bool> isLoggedIn() async {
     final prefs = await SharedPreferences.getInstance();
-    await Future.delayed(const Duration(seconds: 2));
     return prefs.getBool(stateKey) ?? false;
   }
 

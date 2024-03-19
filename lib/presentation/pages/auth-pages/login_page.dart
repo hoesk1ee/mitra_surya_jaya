@@ -93,7 +93,7 @@ class _LoginPageState extends State<LoginPage> {
                   alignment: Alignment.centerRight,
                   child: GestureDetector(
                     onTap: () {
-                      context.go("/forgot-password");
+                      context.go("/login/forgot-password");
                     },
                     child: const Text(
                       "Lupa password?",
@@ -124,7 +124,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          context.go('/register');
+                          context.go('/login/register');
                         },
                         child: const Text(
                           "Daftar disini",

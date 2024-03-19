@@ -20,43 +20,37 @@ final authProvider = AuthProvider(AuthRepository());
 
 final router = GoRouter(
   navigatorKey: _rootNavigatorKey,
-  refreshListenable: authProvider,
-  redirect: (context, state) async {
-    final isLoggedIn = await context.read<AuthProvider>().userLoggedIn();
-    if (isLoggedIn) {
-      return '/home';
-    }
-    if (!isLoggedIn) {
-      return '/';
-    }
-    return '/splashscreen';
-  },
   routes: <RouteBase>[
     GoRoute(
       path: '/',
-      builder: (context, state) => const LoginPage(),
+      builder: (context, state) => const SplashScreen(),
       routes: [
         GoRoute(
-          path: 'register',
-          builder: (context, state) => const RegisterPage(),
-        ),
-        GoRoute(
-          path: 'forgot-password',
-          builder: (context, state) => const ForgotPasswordPage(),
-        ),
-        GoRoute(
-          path: 'verification',
-          builder: (context, state) => const VerificationPage(),
-        ),
-        GoRoute(
-          path: 'reset-confirmation',
-          builder: (context, state) => const ResetPasswordConfirmationPage(),
+          path: 'login',
+          builder: (context, state) => const LoginPage(),
+          routes: [
+            GoRoute(
+              path: 'register',
+              builder: (context, state) => const RegisterPage(),
+              routes: [
+                GoRoute(
+                  path: 'verification',
+                  builder: (context, state) => const VerificationPage(),
+                ),
+              ],
+            ),
+            GoRoute(
+              path: 'forgot-password',
+              builder: (context, state) => const ForgotPasswordPage(),
+            ),
+            GoRoute(
+              path: 'reset-confirmation',
+              builder: (context, state) =>
+                  const ResetPasswordConfirmationPage(),
+            ),
+          ],
         ),
       ],
-    ),
-    GoRoute(
-      path: '/splashscreen',
-      builder: (context, state) => const SplashScreen(),
     ),
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) {
@@ -70,6 +64,12 @@ final router = GoRouter(
             GoRoute(
               path: '/home',
               builder: (context, state) => const HomePage(),
+              redirect: (context, state) async {
+                final isLoggedIn =
+                    await context.read<AuthProvider>().userLoggedIn();
+
+                return isLoggedIn ? '/home' : '/login';
+              },
             ),
           ],
         ),

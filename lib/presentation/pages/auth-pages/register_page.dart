@@ -135,7 +135,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       const Gap(16),
                       CustomAuthButtonWidget(
                         onPressed: () {
-                          context.go('/verification');
+                          context.go('/login/register/verification');
                         },
                         label: "Daftar",
                       ),

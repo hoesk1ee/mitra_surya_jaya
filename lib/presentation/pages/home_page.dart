@@ -13,7 +13,7 @@ class HomePage extends StatelessWidget {
         child: ElevatedButton(
           onPressed: () async {
             await context.read<AuthProvider>().userLogout().then((value) {
-              context.go('/');
+              context.go('/home');
             });
           },
           child: const Text("Logout"),
