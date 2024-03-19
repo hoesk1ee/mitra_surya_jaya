@@ -56,7 +56,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                 CustomAuthButtonWidget(
                   label: "Reset Password",
                   onPressed: () {
-                    context.go('/reset-confirmation');
+                    context.go('/login/forgot-password/reset-confirmation');
                   },
                 )
               ],

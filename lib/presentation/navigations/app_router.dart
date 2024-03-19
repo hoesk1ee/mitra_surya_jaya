@@ -42,11 +42,13 @@ final router = GoRouter(
             GoRoute(
               path: 'forgot-password',
               builder: (context, state) => const ForgotPasswordPage(),
-            ),
-            GoRoute(
-              path: 'reset-confirmation',
-              builder: (context, state) =>
-                  const ResetPasswordConfirmationPage(),
+              routes: [
+                GoRoute(
+                  path: 'reset-confirmation',
+                  builder: (context, state) =>
+                      const ResetPasswordConfirmationPage(),
+                ),
+              ],
             ),
           ],
         ),
@@ -60,6 +62,7 @@ final router = GoRouter(
         /// * First Tab
         StatefulShellBranch(
           navigatorKey: _sectionNavigatorKey,
+          initialLocation: '/home',
           routes: <RouteBase>[
             GoRoute(
               path: '/home',
