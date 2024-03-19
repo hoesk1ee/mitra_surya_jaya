@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:mitra_surya_jaya/presentation/providers/auth_provider.dart';
-import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -9,14 +6,9 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () async {
-            await context.read<AuthProvider>().userLogout().then((value) {
-              context.go('/home');
-            });
-          },
-          child: const Text("Logout"),
+      body: SafeArea(
+        child: Column(
+          children: [],
         ),
       ),
     );
