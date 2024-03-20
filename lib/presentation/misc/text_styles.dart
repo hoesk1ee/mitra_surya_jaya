@@ -20,4 +20,9 @@ class AppTextStyle {
   static const smallSizeTextStyle = TextStyle(
     fontSize: AppSize.hintTextSize,
   );
+
+  static const mainBlackTextStyle = TextStyle(
+    fontFamily: "Poppins",
+    color: Colors.black,
+  );
 }

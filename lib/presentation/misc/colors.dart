@@ -7,4 +7,5 @@ class AppColor {
   static const shadowColor = Color(0xFFDFE3EE);
   static const hintTextColor = Color(0xFFBDBDBD);
   static const textFieldColor = Color(0xFFF4F4F4);
+  static const profitColor = Color(0xFF26FF17);
 }

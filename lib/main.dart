@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp.router(
         theme: ThemeData(
-          textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
+          fontFamily: 'Poppins',
           bottomNavigationBarTheme: const BottomNavigationBarThemeData(
             selectedLabelStyle: TextStyle(
               fontSize: 11,
