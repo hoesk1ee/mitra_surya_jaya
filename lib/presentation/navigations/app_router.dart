@@ -3,8 +3,10 @@ import 'package:go_router/go_router.dart';
 import 'package:mitra_surya_jaya/data/db/auth_repository.dart';
 import 'package:mitra_surya_jaya/presentation/pages/cashier_page.dart';
 import 'package:mitra_surya_jaya/presentation/pages/auth-pages/forgot_password_page.dart';
-import 'package:mitra_surya_jaya/presentation/pages/home_page.dart';
+import 'package:mitra_surya_jaya/presentation/pages/home-pages/home_page.dart';
 import 'package:mitra_surya_jaya/presentation/pages/auth-pages/login_page.dart';
+import 'package:mitra_surya_jaya/presentation/pages/home-pages/report_page.dart';
+import 'package:mitra_surya_jaya/presentation/pages/home-pages/transaction_page.dart';
 import 'package:mitra_surya_jaya/presentation/pages/product_page.dart';
 import 'package:mitra_surya_jaya/presentation/pages/auth-pages/register_page.dart';
 import 'package:mitra_surya_jaya/presentation/pages/auth-pages/reset_password_confirmation_page.dart';
@@ -27,6 +29,16 @@ final router = GoRouter(
       routes: [
         GoRoute(
           path: 'login',
+          redirect: (context, state) async {
+            final isLoggedIn =
+                await context.read<AuthProvider>().userLoggedIn();
+
+            if (isLoggedIn) {
+              return '/home';
+            } else {
+              return null;
+            }
+          },
           builder: (context, state) => const LoginPage(),
           routes: [
             GoRoute(
@@ -67,12 +79,16 @@ final router = GoRouter(
             GoRoute(
               path: '/home',
               builder: (context, state) => const HomePage(),
-              redirect: (context, state) async {
-                final isLoggedIn =
-                    await context.read<AuthProvider>().userLoggedIn();
-
-                return isLoggedIn ? '/home' : '/login';
-              },
+              routes: [
+                GoRoute(
+                  path: 'transaction',
+                  builder: (context, state) => const TransactionPage(),
+                ),
+                GoRoute(
+                  path: 'report',
+                  builder: (context, state) => const ReportPage(),
+                ),
+              ],
             ),
           ],
         ),

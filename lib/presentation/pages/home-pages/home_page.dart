@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mitra_surya_jaya/data/db/auth_repository.dart';
 import 'package:mitra_surya_jaya/presentation/misc/colors.dart';
 import 'package:mitra_surya_jaya/presentation/misc/text_styles.dart';
+import 'package:mitra_surya_jaya/presentation/providers/auth_provider.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -19,26 +23,38 @@ class HomePage extends StatelessWidget {
               ///* User Profile Widget
               Row(
                 children: [
-                  const CircleAvatar(
-                    radius: 28,
-                  ),
-                  const Gap(12),
-                  RichText(
-                    text: TextSpan(
-                      text: "Selamat Pagi,",
-                      style: DefaultTextStyle.of(context).style.copyWith(
-                            height: 1.2,
-                            fontSize: 14,
-                          ),
-                      children: [
-                        TextSpan(
-                          text: "\nJohn Doe",
-                          style: AppTextStyle.titleTextStyle.copyWith(
-                            fontSize: 17,
-                          ),
+                  Row(
+                    children: [
+                      const CircleAvatar(
+                        radius: 28,
+                      ),
+                      const Gap(12),
+                      RichText(
+                        text: TextSpan(
+                          text: "Selamat Pagi,",
+                          style: DefaultTextStyle.of(context).style.copyWith(
+                                height: 1.2,
+                                fontSize: 14,
+                              ),
+                          children: [
+                            TextSpan(
+                              text: "\nJohn Doe",
+                              style: AppTextStyle.titleTextStyle.copyWith(
+                                fontSize: 17,
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
+                  ),
+                  const Spacer(),
+                  IconButton(
+                    onPressed: () async {
+                      await context.read<AuthProvider>().userLogout();
+                      context.go('/');
+                    },
+                    icon: Icon(Icons.logout),
                   ),
                 ],
               ),
@@ -217,52 +233,65 @@ class HomePage extends StatelessWidget {
                   crossAxisSpacing: 16,
                   crossAxisCount: 2,
                   children: [
-                    _buildGridCard(
-                      context,
-                      () {},
-                      Icons.description,
-                      "Cek Laporan",
+                    GestureDetector(
+                      onTap: () {
+                        context.go('/home/report');
+                      },
+                      child: _buildCard(
+                        context,
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Icon(
+                              Icons.description,
+                              size: 48,
+                              color: AppColor.mainWhiteColor,
+                            ),
+                            const Gap(8),
+                            Text(
+                              "Cek Laporan",
+                              style: AppTextStyle.titleTextStyle.copyWith(
+                                color: AppColor.mainWhiteColor,
+                                fontSize: 17,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
-                    _buildGridCard(
-                      context,
-                      () {},
-                      Icons.receipt_long,
-                      "Cek Transaksi",
+                    GestureDetector(
+                      onTap: () {
+                        context.go("/home/transaction");
+                      },
+                      child: _buildCard(
+                        context,
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Icon(
+                              Icons.receipt_long,
+                              size: 48,
+                              color: AppColor.mainWhiteColor,
+                            ),
+                            const Gap(8),
+                            Text(
+                              "Cek Transaksi",
+                              style: AppTextStyle.titleTextStyle.copyWith(
+                                color: AppColor.mainWhiteColor,
+                                fontSize: 17,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                   ],
                 ),
               ),
             ],
           ),
-        ),
-      ),
-    );
-  }
-
-  GestureDetector _buildGridCard(
-      BuildContext context, Function() onTap, IconData icon, String label) {
-    return GestureDetector(
-      onTap: onTap,
-      child: _buildCard(
-        context,
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Icon(
-              icon,
-              size: 48,
-              color: AppColor.mainWhiteColor,
-            ),
-            const Gap(8),
-            Text(
-              label,
-              style: AppTextStyle.titleTextStyle.copyWith(
-                color: AppColor.mainWhiteColor,
-                fontSize: 17,
-              ),
-            ),
-          ],
         ),
       ),
     );
