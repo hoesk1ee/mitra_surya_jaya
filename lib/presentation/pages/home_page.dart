@@ -210,7 +210,7 @@ class HomePage extends StatelessWidget {
                   ],
                 ),
               ),
-              const Gap(22),
+              const Gap(18),
               Expanded(
                 child: GridView.count(
                   mainAxisSpacing: 16,
