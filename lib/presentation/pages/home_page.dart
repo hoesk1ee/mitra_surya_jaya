@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
 import 'package:mitra_surya_jaya/presentation/misc/colors.dart';
 import 'package:mitra_surya_jaya/presentation/misc/text_styles.dart';
@@ -209,8 +210,59 @@ class HomePage extends StatelessWidget {
                   ],
                 ),
               ),
+              const Gap(22),
+              Expanded(
+                child: GridView.count(
+                  mainAxisSpacing: 16,
+                  crossAxisSpacing: 16,
+                  crossAxisCount: 2,
+                  children: [
+                    _buildGridCard(
+                      context,
+                      () {},
+                      Icons.description,
+                      "Cek Laporan",
+                    ),
+                    _buildGridCard(
+                      context,
+                      () {},
+                      Icons.receipt_long,
+                      "Cek Transaksi",
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  GestureDetector _buildGridCard(
+      BuildContext context, Function() onTap, IconData icon, String label) {
+    return GestureDetector(
+      onTap: onTap,
+      child: _buildCard(
+        context,
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Icon(
+              icon,
+              size: 48,
+              color: AppColor.mainWhiteColor,
+            ),
+            const Gap(8),
+            Text(
+              label,
+              style: AppTextStyle.titleTextStyle.copyWith(
+                color: AppColor.mainWhiteColor,
+                fontSize: 17,
+              ),
+            ),
+          ],
         ),
       ),
     );
